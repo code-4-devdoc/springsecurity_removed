@@ -1,0 +1,13 @@
+POST http://localhost:8080/api/resumes
+Content-Type: application/json
+
+{
+  "title": "Sample Resume",
+  "sections": [
+    {
+      "title": "Education",
+      "content": "Sample content for education"
+    }
+  ],
+  "createdAt": "2024-06-11T00:00:00"
+}

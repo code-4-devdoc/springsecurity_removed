@@ -4,7 +4,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useParams } from 'react-router-dom';
 import AboutMe from '../ResumeForm/AboutMe/AboutMe';
-import ResumeNav from '../ResumeCategory/CategoryList';
+
 
 const ResumeBuilder = () => {
     const [selectedSections, setSelectedSections] = useState([]);

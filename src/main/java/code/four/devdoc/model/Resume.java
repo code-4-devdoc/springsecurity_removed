@@ -17,7 +17,7 @@ public class Resume {
     @ElementCollection
     private List<Section> sections;
 
-    // getter와 setter
+
     public Long getId() {
         return id;
     }

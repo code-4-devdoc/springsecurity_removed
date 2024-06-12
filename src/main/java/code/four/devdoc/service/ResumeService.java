@@ -1,7 +1,9 @@
 package code.four.devdoc.service;
 
+import code.four.devdoc.model.PersonalInfo;
 import code.four.devdoc.model.Resume;
 import code.four.devdoc.model.Section;
+import code.four.devdoc.repository.PersonalInfoRepository;
 import code.four.devdoc.repository.ResumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,17 +24,20 @@ public class ResumeService {
     @Autowired
     private ResumeRepository resumeRepository;
 
+    @Autowired
+    private PersonalInfoRepository personalInfoRepository;
+
     public List<Resume> getAllResumes() {
         return resumeRepository.findAll();
-    }
-
-    public Resume getResumeById(Long id) {
-        return resumeRepository.findById(id).orElse(null);
     }
 
     public Resume saveResume(Resume resume) {
         resume.setCreatedAt(LocalDateTime.now());
         return resumeRepository.save(resume);
+    }
+
+    public PersonalInfo savePersonalInfo(PersonalInfo personalInfo) {
+        return personalInfoRepository.save(personalInfo);
     }
 
     public ByteArrayInputStream generatePdf(Long id) {
@@ -55,7 +60,6 @@ public class ResumeService {
         return new ByteArrayInputStream(out.toByteArray());
     }
 }
-
 
 
 /*

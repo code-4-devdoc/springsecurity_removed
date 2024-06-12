@@ -1,5 +1,6 @@
 package code.four.devdoc.controller;
 
+import code.four.devdoc.model.PersonalInfo;
 import code.four.devdoc.model.Resume;
 import code.four.devdoc.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +25,10 @@ public class ResumeController {
         return resumeService.getAllResumes();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Resume> getResumeById(@PathVariable Long id) {
-        Resume resume = resumeService.getResumeById(id);
-        if (resume != null) {
-            return ResponseEntity.ok(resume);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
     @PostMapping
     public ResponseEntity<Resume> saveResume(@RequestBody Resume resume) {
         try {
+            System.out.println("Received Resume: " + resume);
             Resume savedResume = resumeService.saveResume(resume);
             return ResponseEntity.status(HttpStatus.CREATED).body(savedResume);
         } catch (Exception e) {
@@ -59,6 +51,7 @@ public class ResumeController {
                 .body(new InputStreamResource(bis));
     }
 }
+
 
 
 

@@ -31,7 +31,32 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    /* 기존의 인증 관련 설정
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll()
+                )
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
+
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .build();
+    }
+}
+
+
+/*
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+     //기존의 인증 관련 설정
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -46,7 +71,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    */
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -60,6 +85,6 @@ public class SecurityConfig {
         return http.build();
     }
 }
-
+*/
 
 

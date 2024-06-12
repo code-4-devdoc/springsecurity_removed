@@ -1,90 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Section from './Section';
 
-const ResumeForm = ({ selectedSections }) => {
-    const [formData, setFormData] = useState({});
-
-    const handleInputChange = (field, value) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            [field]: value
-        }));
-    };
-
-    const handleSaveResume = async () => {
-        const resume = {
-            title: 'Sample Resume', // 필요에 따라 사용자가 입력한 제목으로 변경 가능
-            sections: selectedSections.map(section => ({
-                title: section.title,
-                content: formData[section.id] || ''
-            })),
-            createdAt: new Date().toISOString()
-        };
-
-        try {
-            const response = await fetch('http://localhost:8080/api/resumes', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(resume),
-            });
-
-            if (response.ok) {
-                alert('Resume saved successfully');
-            } else {
-                alert('Failed to save resume');
-            }
-        } catch (error) {
-            console.error('Error saving resume:', error);
-            alert('Error saving resume');
-        }
-    };
-
-    const handleSavePersonalInfo = async () => {
-        const personalInfo = {
-            name: formData.name,
-            jobTitle: formData.jobTitle,
-            email: formData.email,
-            contact: formData.contact,
-            githubUrl: formData.githubUrl,
-            summary: formData.summary,
-            photo: formData.photo
-        };
-
-        try {
-            const response = await fetch('http://localhost:8080/api/personal-info', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(personalInfo),
-            });
-
-            if (response.ok) {
-                alert('Personal Info saved successfully');
-            } else {
-                alert('Failed to save Personal Info');
-            }
-        } catch (error) {
-            console.error('Error saving personal info:', error);
-            alert('Error saving personal info');
-        }
-    };
-
+const ResumeForm = ({ selectedSections = [], saveResume, previewResume, handleInputChange }) => {
     return (
         <div className="resume-form">
             <h3>Resume Form</h3>
-            {selectedSections.map((section, index) => (
-                <Section key={index} section={section} onInputChange={handleInputChange} />
-            ))}
-            <button onClick={handleSaveResume}>Save Resume</button>
-            <button onClick={handleSavePersonalInfo}>Save Personal Info</button>
+            {selectedSections.length > 0 ? (
+                selectedSections.map((section, index) => (
+                    <Section key={index} section={section} handleInputChange={handleInputChange} />
+                ))
+            ) : (
+                <p>No sections selected.</p>
+            )}
+            <button onClick={saveResume}>Save</button>
+            <button onClick={previewResume}>Preview</button>
         </div>
     );
 };
 
 export default ResumeForm;
+
+
+
 
 
 

@@ -1,16 +1,8 @@
 import React from 'react';
 
 const sections = [
-    { id: 'personalInfo', title: 'Personal Information' },
-    { id: 'skill', title: 'Skill' },
-    { id: 'education', title: 'Education' },
-    { id: 'career', title: 'Career' },
-    { id: 'project', title: 'Project' },
-    { id: 'training', title: 'Training' },
-    { id: 'activity', title: 'Activity' },
-    { id: 'award', title: 'Award' },
-    { id: 'certification', title: 'Certification' },
-    { id: 'language', title: 'Language' },
+    { id: 'personalInfo', title: 'About Me' },
+    // 항목 추가 필요
 ];
 
 const SectionList = ({ addSection }) => {
@@ -29,3 +21,4 @@ const SectionList = ({ addSection }) => {
 };
 
 export default SectionList;
+
